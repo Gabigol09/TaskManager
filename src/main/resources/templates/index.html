@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Manager</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">Task Manager</h1>
+      <a href="/add" class="btn btn-primary mb-3">Adicionar nova</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Descriçao</th>
+            <th>Categoria</th>
+            <th>Prioridade</th>
+            <th>Completo</th>
+            <th>Açoes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="task : ${tasks}">
+            <td th:text="${task.title}"></td>
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.category}"></td>
+            <td th:text="${task.priority}"></td>
+            <td>
+              <span
+                th:text="${task.completed} ? 'Sim' : 'Nao'"
+                th:class="${task.completed} ? 'badge badge-success' : 'badge badge-secondary'"
+              ></span>
+            </td>
+            <td>
+              <a
+                th:href="@{/edit/{id}(id=${task.id})}"
+                class="btn btn-sm btn-warning"
+                >Editar</a
+              >
+              <a
+                th:href="@{/delete/{id}(id=${task.id})}"
+                class="btn btn-sm btn-danger ml-2"
+                >Deletar</a
+              >
+              <a
+                th:href="@{/complete/{id}(id=${task.id})}"
+                class="btn btn-sm btn-success ml-2"
+                >Completo</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
